@@ -21,6 +21,7 @@ print(matriz)
 
 graph.transformaMatrizGrafo(matriz)
 print("\n")
-print(graph.adjList)
-print(graph.nodeCount)
+print(len(matriz))
+
+
 
