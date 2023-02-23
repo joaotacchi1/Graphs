@@ -1,27 +1,23 @@
-from lab import Graph
+from MazeFunctions import *
+import time
 
-def leArquivoMatriz(arquivo):
-    with open(arquivo, "r") as arquivo:
-      linhas = arquivo.readlines()
+arquivo = ''
+while arquivo != '0':
 
-    matriz = []
-
-    for linha in linhas:
-      linha = linha.rstrip("\n")
-      elementos = list(linha)
-      matriz.append(elementos)
-
-    return matriz
-
-graph = Graph()
-
-leitura = input("Digite o arquivo: ")
-matriz = leArquivoMatriz(leitura)
-print(matriz)
-
-graph.transformaMatrizGrafo(matriz)
-print("\n")
-print(len(matriz))
-
-
-
+    arquivo = input("Digite o nome do arquivo ou 0 para sair:"+"\n"+"Exemplo: toy"+"\n>>")
+    if arquivo != '0':
+        arquivo = "maze/"+arquivo+".txt"
+    else:
+        print("Encerrando...")
+        break
+    mazeGraph = MazeFunctions(arquivo)
+    mazeGraph.transformaMatrizGrafo()
+    start = time.time()
+    print("Vizualização do labirinto:")
+    mazeGraph.exibeLabirinto(arquivo)
+    print(">>>>>>>>>Dados do labirinto<<<<<<<<<")
+    print("Início: ", mazeGraph.startNode)
+    print("Fim: ", mazeGraph.endNode)
+    print("Trajeto entre os nós: ", busca_saida(mazeGraph.graph, mazeGraph.startNode, mazeGraph.endNode))
+    print("Coordenadas na matriz: ", mazeGraph.coordenadas())
+    print("Tempo de execução em segundos:", time.time()-start)
